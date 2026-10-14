@@ -59,6 +59,7 @@ dev = [
 
 [project.urls]
 Repository = "https://github.com/zueskalare/OKR-Agent"
+Paper = "https://doi.org/10.1002/aisy.70569"
 "Run records (dataset)" = "https://huggingface.co/datasets/BioDMX-UGA/OKRAgent_runs"
 
 [tool.setuptools.packages.find]

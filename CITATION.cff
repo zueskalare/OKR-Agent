@@ -9,56 +9,78 @@ repository-code: "https://github.com/zueskalare/OKR-Agent"
 authors:
   - family-names: Tian
     given-names: Jie
+    orcid: "https://orcid.org/0000-0002-0210-3869"
   - family-names: Pang
     given-names: Lin
   - family-names: Hou
     given-names: Jixin
   - family-names: Sun
     given-names: Xiao
+    orcid: "https://orcid.org/0000-0002-0449-7603"
   - family-names: Jaraczewski
     given-names: James
+    orcid: "https://orcid.org/0009-0005-5370-1120"
   - family-names: Chen
     given-names: Xianyan
   - family-names: Song
     given-names: Kenan
+    orcid: "https://orcid.org/0000-0002-0447-2449"
   - family-names: Zhai
     given-names: Xiaoming
+    orcid: "https://orcid.org/0000-0003-4519-1931"
   - family-names: Liu
     given-names: Tianming
+    orcid: "https://orcid.org/0000-0002-8132-9048"
   - family-names: Tang
     given-names: Keke
+    orcid: "https://orcid.org/0000-0001-5140-4361"
   - family-names: Wang
     given-names: Xianqiao
+    orcid: "https://orcid.org/0000-0002-5073-0701"
 preferred-citation:
   type: article
-  title: "Objectives and Key Results Driven Multi-Agent Framework for Mechanical Design and Simulation"
+  title: "Objectives and Key Results–Driven Multiagent Framework for Mechanical Design and Simulation"
   journal: "Advanced Intelligent Systems"
+  publisher:
+    name: "Wiley"
+  issn: "2640-4567"
   year: 2026
-  # TODO: fill in once assigned
-  doi: "10.1002/aisy.XXXXXXXX"
+  month: 9
+  doi: "10.1002/aisy.70569"
+  url: "https://doi.org/10.1002/aisy.70569"
+  license: CC-BY-4.0
+  notes: "Article e70569; published online 29 September 2026 (open access)."
   authors:
     - family-names: Tian
       given-names: Jie
+      orcid: "https://orcid.org/0000-0002-0210-3869"
     - family-names: Pang
       given-names: Lin
     - family-names: Hou
       given-names: Jixin
     - family-names: Sun
       given-names: Xiao
+      orcid: "https://orcid.org/0000-0002-0449-7603"
     - family-names: Jaraczewski
       given-names: James
+      orcid: "https://orcid.org/0009-0005-5370-1120"
     - family-names: Chen
       given-names: Xianyan
     - family-names: Song
       given-names: Kenan
+      orcid: "https://orcid.org/0000-0002-0447-2449"
     - family-names: Zhai
       given-names: Xiaoming
+      orcid: "https://orcid.org/0000-0003-4519-1931"
     - family-names: Liu
       given-names: Tianming
+      orcid: "https://orcid.org/0000-0002-8132-9048"
     - family-names: Tang
       given-names: Keke
+      orcid: "https://orcid.org/0000-0001-5140-4361"
     - family-names: Wang
       given-names: Xianqiao
+      orcid: "https://orcid.org/0000-0002-5073-0701"
 references:
   - type: data
     title: "OKRAgent_runs: complete records of the 30 audited benchmark runs"

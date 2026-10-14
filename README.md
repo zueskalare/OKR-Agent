@@ -12,9 +12,10 @@ meshing, solving and visualization. This repository holds the framework
 (Python package `AtomAgents`), the OpenAI-compatible backend that serves it,
 the MCP tool service, and the benchmark harness used for the paper.
 
-> **Paper.** J. Tian *et al.*, "Objectives and Key Results Driven Multi-Agent
+> **Paper.** J. Tian *et al.*, "Objectives and Key Results–Driven Multiagent
 > Framework for Mechanical Design and Simulation", *Advanced Intelligent
-> Systems* (2026). Citation metadata in `CITATION.cff`.
+> Systems* e70569 (2026), <https://doi.org/10.1002/aisy.70569> (open access,
+> CC BY 4.0). BibTeX in [Citation](#citation); metadata in `CITATION.cff`.
 >
 > **Run records.** The complete records of the thirty audited benchmark runs —
 > session logs, per-call tool traces, OKR board states, artefact registries with
@@ -867,3 +868,30 @@ Agent-vs-reference overlay plots for the MD demos live in
 `analysis/reference_comparison/` (`compare_demo1.py`, `compare_demo2.py`,
 `compare_rect.py`); each writes an overlay figure plus an
 `overlay_*_metrics.md` carrying the verdict.
+
+## Citation
+
+If you use OKR-Agent, please cite the article (and the run-record dataset
+when you use the benchmark records):
+
+```bibtex
+@article{tian2026okragent,
+  title     = {Objectives and Key Results--Driven Multiagent Framework for
+               Mechanical Design and Simulation},
+  author    = {Tian, Jie and Pang, Lin and Hou, Jixin and Sun, Xiao and
+               Jaraczewski, James and Chen, Xianyan and Song, Kenan and
+               Zhai, Xiaoming and Liu, Tianming and Tang, Keke and Wang, Xianqiao},
+  journal   = {Advanced Intelligent Systems},
+  year      = {2026},
+  pages     = {e70569},
+  doi       = {10.1002/aisy.70569},
+  url       = {https://doi.org/10.1002/aisy.70569},
+  publisher = {Wiley}
+}
+```
+
+Run records: *OKRAgent_runs: complete records of the 30 audited benchmark
+runs*, BioDMX Lab, University of Georgia (2026),
+<https://huggingface.co/datasets/BioDMX-UGA/OKRAgent_runs>.
+The same metadata is machine-readable in `CITATION.cff` (GitHub's
+"Cite this repository" button).
