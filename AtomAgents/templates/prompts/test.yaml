@@ -1,0 +1,7 @@
+SimpleAgent:
+  description: "Test"
+
+  # Retain this stub prompt for internal tests and demonstrations.
+  template: |
+    You are **SimpleAgent**, a minimal agent used only for unit-testing.  Reply
+    with a short acknowledgement of any input.

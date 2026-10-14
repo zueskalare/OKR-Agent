@@ -1,0 +1,20 @@
+# The hierarchical-crew baseline (benchmarks/arms/crewai_arm.py) runs in its own
+# environment: crewai 0.201.1 cannot coexist with the framework's langchain 1.x
+# stack. This is a *virtual* uv project (no package is built): `uv.lock` pins
+# the exact 165 third-party distributions the campaign ran with.
+#
+#     uv venv --python 3.12.9 benchmarks/crewai-env/.venv
+#     uv sync --locked --project benchmarks/crewai-env
+#
+# pip fallback: `python3.12 -m venv .venv && .venv/bin/pip install -r requirements.txt`
+[project]
+name = "okr-crewai-env"
+version = "1.0.0"
+description = "Isolated environment for the CrewAI baseline arm of the OKR-Agent benchmark"
+requires-python = ">=3.10, <3.14"
+dependencies = [
+    "crewai[tools]>=0.201.1,<1.0.0"
+]
+
+[tool.uv]
+package = false

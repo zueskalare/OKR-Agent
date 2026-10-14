@@ -1,0 +1,29 @@
+# Framework environment — the versions the published 30-run campaign ran with
+# (recorded identically in every run manifest: dolfinx 0.9.0, gmsh 4.14.1,
+# ufl 2024.2.0, petsc4py 3.24.0, numpy 2.3.4; CPython 3.11.14).
+#
+#     conda env create -f environment.yml -p ./venv
+#     ./venv/bin/pip install -e .          # the framework itself (editable)
+#
+# Provenance note: on the study machine the conda layer supplied the compiled
+# scientific stack (DOLFINx/PETSc/MPICH/VTK) and pip supplied everything else,
+# including numpy 2.3.4, gmsh 4.14.1 and ovito 3.13.1 — requirements.txt is the
+# pip layer, pinned exactly. LAMMPS is NOT in this file: see docs/INSTALL.md.
+name: okr-agent
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.11.14
+  - pip
+  - fenics-dolfinx=0.9.0
+  - petsc4py=3.24.0
+  - mpich=4.3.2
+  - mpi4py=4.1.1
+  - hdf5=1.14.6
+  - h5py=3.15.0
+  - vtk=9.5.0
+  - pyvista=0.46.3
+  - meshio=5.3.5
+  - pip:
+      - -r requirements.txt

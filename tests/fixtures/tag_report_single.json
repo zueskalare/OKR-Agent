@@ -1,0 +1,16 @@
+{
+  "facet": {
+    "5": 123
+  },
+  "cell": {
+    "6": 4361
+  },
+  "tag_map": {
+    "Left": 1,
+    "Right": 2,
+    "Bottom": 3,
+    "Top": 4,
+    "Hole": 5,
+    "Domain": 6
+  }
+}

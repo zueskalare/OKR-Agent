@@ -1,0 +1,33 @@
+Generate a full molecular dynamics (MD) simulation of a twisted carbon nanotube (CNT) fiber bundle using LAMMPS.
+
+Model Generation:
+	•	Build a coarse-grained model of 92 (5,5) SWCNTs arranged in a hexagonally packed cylindrical bundle, total fiber length 100 nm.
+	•	Apply helical twist to the bundle with n = 1 twist lap over the fiber length, where each CNT follows a helical centerline:
+	•	Use the natural bundle radius R_b from hexagonal close packing at ~1.0 nm inter-tube spacing, and pitch L/n, to generate helical coordinates for each CNT.
+	•	Use a finite fiber: non-periodic boundary conditions in all three directions, with vacuum padding along z.
+	•	Output the model as a LAMMPS data file (model1.data) with proper atom types, bonds, and box dimensions.
+
+Simulation Setup:
+	•	Write a LAMMPS input script to:
+	•	Load model1.data
+	•	Use appropriate CG force fields (e.g. lj/cut, bond_style harmonic)
+	•	Perform energy minimization and relaxation with NVT ensemble at T = 1K
+	•	Apply uniaxial tension with grips: define ~1 nm grip regions at the top and bottom fiber ends; hold the bottom grip fixed and displace the top grip along +z at a constant engineering strain rate (do not use fix deform).
+	•	Enable output of thermo data, trajectory dumps, and per-atom stress and displacement data.
+
+Postprocessing:
+	•	Compute the engineering stress-strain curve using the LAMMPS outputs:
+	•	Use the zz-component of atomic stress and z-displacement or box length.
+	•	Output stress vs strain data as plain text.
+	•	Generate and save a plot of the stress-strain curve as a PNG.
+
+Output Requirements:
+	•	model1.data – Coarse-grained model of the twisted CNT bundle.
+	•	run_tension.in – LAMMPS input script with tension simulation and data dumps.
+	•	stress.dat and strain.dat – Text files of computed stress and strain.
+	•	stress_strain_curve.png – Plot of the tensile response of the fiber.
+	•	dump.tension.lammpstrj – Full trajectory of the tension simulation for visualization.
+
+Notes:
+	•	Use appropriate coarse-grained parameters for (5,5) CNTs (mass, bead spacing, LJ σ/ε, bond force constants).
+	•	Dump and log the simulation process at regular intervals for analysis.

@@ -1,0 +1,41 @@
+# LAMMPS input: Polycrystalline Fe compression (contract, 150A model)
+units metal
+atom_style atomic
+boundary p p p
+
+log build.log
+read_data <repo>/jobs_bk_2/session-atomagent-demo2_success_1/input/model_Fe.data
+
+neighbor 2.0 bin
+neigh_modify every 1 delay 0 check yes
+
+pair_style eam/fs
+pair_coeff * * <repo>/jobs_bk_2/session-atomagent-demo2_success_1/input/potentials/Fe_Mendelev.eam.fs Fe
+
+timestep 0.001
+thermo 100
+thermo_style custom step temp pe etotal press pxx pyy pzz lx ly lz atoms
+
+min_style cg
+minimize 1.0e-12 1.0e-12 2000 10000
+
+velocity all create 10.0 4928459 mom yes rot yes dist gaussian
+fix nvtfix all nvt temp 10.0 10.0 0.1
+run 1000
+unfix nvtfix
+
+compute peratom all stress/atom NULL
+compute pzz all reduce sum c_peratom[3]
+variable natoms equal count(all)
+variable sigma_zz equal -c_pzz/(v_natoms*vol)
+
+reset_timestep 0
+fix 1 all deform 1 z erate -0.0005 units box remap x
+fix nvt2 all nvt temp 10.0 10.0 0.1
+
+thermo 1000
+thermo_style custom step temp pe etotal press pzz v_sigma_zz lx ly lz atoms
+
+dump dcomp all custom 1000 dump.compression.lammpstrj id type x y z
+run 200000
+write_data final_structure.data

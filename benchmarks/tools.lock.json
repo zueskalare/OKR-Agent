@@ -1,0 +1,75 @@
+{
+  "note": "Regenerate with `python -m benchmarks.toolbind --write`. Every arm asserts against this before a billed run.",
+  "count": 17,
+  "tools": {
+    "file_reader": {
+      "source": "mcp",
+      "fingerprint": "6cb5f32cc765fc90"
+    },
+    "code_runner": {
+      "source": "mcp",
+      "fingerprint": "36011e84c2407621"
+    },
+    "write_file": {
+      "source": "mcp",
+      "fingerprint": "b189de8948ac5958"
+    },
+    "download_file": {
+      "source": "mcp",
+      "fingerprint": "d538b3ce8dabad66"
+    },
+    "web_search": {
+      "source": "mcp",
+      "fingerprint": "2de1dab44dc93648"
+    },
+    "bash_run": {
+      "source": "mcp",
+      "fingerprint": "72ef6b99a95f59c1"
+    },
+    "md_visualize": {
+      "source": "mcp",
+      "fingerprint": "9688ccf7dc5814b2"
+    },
+    "lammps_run": {
+      "source": "mcp",
+      "fingerprint": "0bbb9c57f9510b39"
+    },
+    "fem_mesh_visualize": {
+      "source": "mcp",
+      "fingerprint": "7d165070ff4ef349"
+    },
+    "fem_poisson_solve_visualize": {
+      "source": "mcp",
+      "fingerprint": "835772ae5044670f"
+    },
+    "fem_elasticity_solve_visualize": {
+      "source": "mcp",
+      "fingerprint": "02619cdb5e1285a6"
+    },
+    "fenicsx_doc_query": {
+      "source": "mcp",
+      "fingerprint": "328224c8b2085010"
+    },
+    "lammps_doc_query": {
+      "source": "mcp",
+      "fingerprint": "45f5e9c2a0b26f41"
+    },
+    "register_artefact": {
+      "source": "okr",
+      "fingerprint": "e77ae76822ef4b15"
+    },
+    "record_metric": {
+      "source": "okr",
+      "fingerprint": "efdb70edb7956888"
+    },
+    "record_attempt": {
+      "source": "okr",
+      "fingerprint": "650ccbe7f2bf8a3b"
+    },
+    "list_artefacts": {
+      "source": "okr",
+      "fingerprint": "a04b8da2186b7951"
+    }
+  },
+  "digest": "357bd60c7792587e7eaf7fe5c988e9a788d801efecde007568f2ec5dde7d2adc"
+}

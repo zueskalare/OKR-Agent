@@ -1,0 +1,52 @@
+# environments
+venv/
+.venv/
+benchmarks/crewai-env/.venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+build/
+dist/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# secrets — only the template is tracked
+.env
+.env.*
+!.env.example
+
+# runtime data: sessions, logs, archives (runs/README.md documents the layout)
+runs/*
+!runs/README.md
+*.db
+*.db-wal
+*.db-shm
+.trash/
+
+# simulation artefacts and media produced by runs
+*.lammpstrj
+*.restart
+*.lmp
+*.lammps
+*.dump
+dump.*
+*.pdf
+*.mp4
+*.gif
+*.jpg
+*.png
+!examples/demos/demo_img/**
+*.xlsx
+
+# lockfiles: the CrewAI environment lock is deliberately tracked
+uv.lock
+!benchmarks/crewai-env/uv.lock
+
+# editor / OS / agent-tool noise
+.DS_Store
+.claude/
+.gradio/

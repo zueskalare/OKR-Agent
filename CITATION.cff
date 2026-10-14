@@ -1,0 +1,68 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the article and the run-record dataset below."
+title: "OKR-Agent: Objectives and Key Results Driven Multi-Agent Framework for Mechanical Design and Simulation"
+type: software
+version: 1.0.0
+date-released: "2026-10-08"
+license: MIT
+repository-code: "https://github.com/zueskalare/OKR-Agent"
+authors:
+  - family-names: Tian
+    given-names: Jie
+  - family-names: Pang
+    given-names: Lin
+  - family-names: Hou
+    given-names: Jixin
+  - family-names: Sun
+    given-names: Xiao
+  - family-names: Jaraczewski
+    given-names: James
+  - family-names: Chen
+    given-names: Xianyan
+  - family-names: Song
+    given-names: Kenan
+  - family-names: Zhai
+    given-names: Xiaoming
+  - family-names: Liu
+    given-names: Tianming
+  - family-names: Tang
+    given-names: Keke
+  - family-names: Wang
+    given-names: Xianqiao
+preferred-citation:
+  type: article
+  title: "Objectives and Key Results Driven Multi-Agent Framework for Mechanical Design and Simulation"
+  journal: "Advanced Intelligent Systems"
+  year: 2026
+  # TODO: fill in once assigned
+  doi: "10.1002/aisy.XXXXXXXX"
+  authors:
+    - family-names: Tian
+      given-names: Jie
+    - family-names: Pang
+      given-names: Lin
+    - family-names: Hou
+      given-names: Jixin
+    - family-names: Sun
+      given-names: Xiao
+    - family-names: Jaraczewski
+      given-names: James
+    - family-names: Chen
+      given-names: Xianyan
+    - family-names: Song
+      given-names: Kenan
+    - family-names: Zhai
+      given-names: Xiaoming
+    - family-names: Liu
+      given-names: Tianming
+    - family-names: Tang
+      given-names: Keke
+    - family-names: Wang
+      given-names: Xianqiao
+references:
+  - type: data
+    title: "OKRAgent_runs: complete records of the 30 audited benchmark runs"
+    url: "https://huggingface.co/datasets/BioDMX-UGA/OKRAgent_runs"
+    year: 2026
+    authors:
+      - name: "BioDMX Lab, University of Georgia"

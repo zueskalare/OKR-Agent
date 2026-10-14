@@ -1,0 +1,8 @@
+[INFO] Start solve (FULL plate, 3 holes) at 2025-10-20T17:30:10.987313
+Manifest:
+PR=/workspace/okr-agent/jobs/session-atomagent-fem_demo0_3holes_full
+INPUT=/workspace/okr-agent/jobs/session-atomagent-fem_demo0_3holes_full/input
+OUTPUT=/workspace/okr-agent/jobs/session-atomagent-fem_demo0_3holes_full/output
+ANALYSIS=/workspace/okr-agent/jobs/session-atomagent-fem_demo0_3holes_full/analysis
+MESH_DIR=/workspace/okr-agent/jobs/session-atomagent-fem_demo0_3holes_full/input/mesh
+[INFO] PETSc reason=3 its=745 rfinal=9.498e-13 elapsed=1.223s ndofs=30810

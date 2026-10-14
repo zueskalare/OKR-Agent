@@ -1,0 +1,33 @@
+{
+  "source": "README.md",
+  "note": "Regenerate with `python -m benchmarks.extract_briefs`; verify with `--check`. The runner refuses to launch on a hash mismatch.",
+  "tasks": {
+    "demo1": {
+      "task": "demo1",
+      "model": "atomagent",
+      "prompt_flavor": "AtomAgents/templates/prompts",
+      "session_dir": "session-atomagent-demo1",
+      "brief_file": "demo1.txt",
+      "chars": 2170,
+      "sha256": "695c96aec968763a65c90ed9e604ebbe2cec60f559d5ca06fc9ee82aebae23f8"
+    },
+    "demo2": {
+      "task": "demo2",
+      "model": "atomagent",
+      "prompt_flavor": "AtomAgents/templates/prompts",
+      "session_dir": "session-atomagent-demo2",
+      "brief_file": "demo2.txt",
+      "chars": 1646,
+      "sha256": "b538184cf63da0f96da09585bdb8a9c1750703dd706f454a6484b7b83c605d47"
+    },
+    "fem_demo0": {
+      "task": "fem_demo0",
+      "model": "fenicsagent",
+      "prompt_flavor": "AtomAgents/templates/fenicsx",
+      "session_dir": "session-atomagent-fem_demo0",
+      "brief_file": "fem_demo0.txt",
+      "chars": 3581,
+      "sha256": "ac24b04c06e2c51bc890ffbda9c01b12e03a54ffcd2a2bff67c4763d99f61318"
+    }
+  }
+}

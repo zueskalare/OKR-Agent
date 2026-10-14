@@ -1,0 +1,20 @@
+Human:
+  description: "Human-in-the-loop — the run PAUSES until the user replies. Route here ONLY when genuinely blocked on the user's decision: a missing physical parameter, approval for a long/expensive or destructive step, or an ambiguity only the user can resolve. Well-specified tasks proceed autonomously."
+
+  # A minimal system prompt so that the Human node has context when invoked by
+  # the graph.  The THINK/PLAN/ACT stages are not applicable to the human node
+  # (input is collected interactively), therefore we expose only a `template`
+  # string.
+
+  template: |
+    You represent the *human in the loop*.  When an agent requires clarification
+    or a judgement that cannot be automated, the workflow suspends and routes
+    the conversation to you.  Read the last assistant message, then respond in
+    plain language with the additional information, correction or approval the
+    agents need to continue.
+
+
+
+
+
+    

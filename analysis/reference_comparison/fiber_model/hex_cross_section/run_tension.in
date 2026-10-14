@@ -1,0 +1,113 @@
+log run_prod.log
+
+units real
+boundary f f p
+atom_style bond
+
+read_data <repo>/jobs/session-atomagent-demo1/input/model1.data
+
+pair_style lj/cut 10.0
+pair_modify shift yes mix arithmetic
+bond_style harmonic
+special_bonds lj 0.0 0.0 0.5 coul 0.0 0.0 0.0
+neighbor 2.0 bin
+neigh_modify delay 0 every 1 check yes
+
+mass 1 240.22
+pair_coeff 1 1 0.12 3.4 10.0
+bond_coeff 1 350.0 2.46
+
+thermo 1000
+thermo_style custom step temp pe ke etotal press pxx pyy pzz vol lx ly lz
+
+# -----------------------------
+# Minimization
+# -----------------------------
+min_style cg
+minimize 1.0e-8 1.0e-10 200 1000
+
+# -----------------------------
+# Define grip regions (z slabs: [0,20] A and [980,1000] A)
+# -----------------------------
+region grip_bot block INF INF INF INF 0.0 20.0 units box
+region grip_top block INF INF INF INF 980.0 1000.0 units box
+
+group g_bot region grip_bot
+group g_top region grip_top
+group g_mobile subtract all g_bot g_top
+
+# -----------------------------
+# Define central (gage) region for stress measurement
+# -----------------------------
+region gage block INF INF INF INF 40.0 960.0 units box
+group  g_gage region gage
+group  g_gage_mobile intersect g_gage g_mobile
+
+# -----------------------------
+# Hold bottom grip; zero velocity
+# -----------------------------
+fix f_hold g_bot setforce 0.0 0.0 0.0
+velocity g_bot set 0.0 0.0 0.0
+
+# -----------------------------
+# NVT on mobile at 1 K for 20000 steps (20 ps)
+# -----------------------------
+fix f_nvt g_mobile nvt temp 1.0 1.0 100.0
+timestep 1.0
+run 20000
+unfix f_nvt
+
+# ============================================================
+# GAGE STRESS + STRESS-STRAIN SETUP (for deformation segment)
+# ============================================================
+
+# Per-atom virial stress (returns -P*V style quantities)
+compute stress all stress/atom NULL
+
+# Sum per-atom stress components over gage-mobile atoms
+# Components: [1]=xx [2]=yy [3]=zz [4]=xy [5]=xz [6]=yz
+compute gage_sum g_gage_mobile reduce sum c_stress[1] c_stress[2] c_stress[3] c_stress[4] c_stress[5] c_stress[6]
+
+# Gage volume as fraction of current box volume
+variable gfrac equal 0.92
+variable Vgage equal v_gfrac*vol
+
+# Convert summed virial to stress (units real => atm)
+variable sxx_gage equal -(c_gage_sum[1])/v_Vgage
+variable syy_gage equal -(c_gage_sum[2])/v_Vgage
+variable szz_gage equal -(c_gage_sum[3])/v_Vgage
+
+# Reference length for engineering strain
+variable Lz0 equal lz
+variable strain equal (lz-v_Lz0)/v_Lz0
+
+# Helper variables for output
+variable tempv equal temp
+variable pzzv  equal pzz
+
+# -----------------------------
+# Apply uniaxial tension via fix deform along z
+# -----------------------------
+fix f_def all deform 1 z erate 2.0e-6 units box remap x
+
+# Thermostat mobile during deformation at 1 K
+fix f_nvt2 g_mobile nvt temp 1.0 1.0 100.0
+
+# Dump trajectory (every 1000 steps)
+dump d1 all custom 1000 dump.tension.lammpstrj id type x y z xu yu zu
+
+# Stress-strain output (every 100 steps)
+# Columns: step strain szz_gage(atm) temp(K) pzz_box(atm)
+fix f_ss all ave/time 100 1 100 v_strain v_szz_gage v_tempv v_pzzv file stress_strain_gage.dat
+
+run 20000
+
+# -----------------------------
+# Cleanup
+# -----------------------------
+unfix f_ss
+unfix f_def
+unfix f_nvt2
+undump d1
+
+write_restart run_prod.restart

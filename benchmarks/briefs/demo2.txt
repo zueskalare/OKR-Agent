@@ -1,0 +1,62 @@
+Generate a simple molecular dynamics (MD) simulation of polycrystalline bcc iron (Fe) under uniaxial compression using LAMMPS.
+
+
+
+Model Generation:
+
+    • Build a bcc iron nanocrystal with 4–8 randomly oriented grains, cubic box ~12 nm per side.
+
+    • Use Atomsk (or similar tool) to generate and pack grains; export as LAMMPS data file (model_Fe.data).
+
+    • Apply periodic boundary conditions in all three directions.
+
+
+
+Simulation Setup:
+
+    • Write a LAMMPS input script:
+
+        • Load model_Fe.data
+
+        • Use an appropriate EAM interatomic potential for Fe (e.g., Fe_Mendelev.eam.fs)
+
+        • Minimize energy and relax structure at T = 10K (NVT ensemble)
+
+        • Apply uniaxial compression along the z-axis using fix deform with a small negative engineering strain rate.
+
+        • Output thermo data, trajectory dumps, and per-atom stress for postprocessing.
+
+
+
+Postprocessing:
+
+    • Compute engineering stress-strain curve from LAMMPS global stress (zz-component) and box length.
+
+    • Output stress.dat and strain.dat as plain text files.
+
+    • Generate a plot (stress_strain_Fe.png) of the stress-strain curve.
+
+    • Save the full trajectory as dump.compression.lammpstrj for visualization.
+
+
+
+Output Requirements:
+
+    • model_Fe.data – Polycrystalline Fe model (coarse nanocrystal)
+
+    • run_compress.in – LAMMPS input script
+
+    • stress.dat, strain.dat – Computed stress/strain
+
+    • stress_strain_Fe.png – Stress-strain plot
+
+    • dump.compression.lammpstrj – Trajectory dump
+
+
+
+Notes:
+
+    • Use published EAM Fe potential, e.g., Mendelev.
+
+    • Log/dump data at regular simulation intervals for analysis.
+

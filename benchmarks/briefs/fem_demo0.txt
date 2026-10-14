@@ -1,0 +1,70 @@
+# AI Agent Execution Brief — FEniCSx Plate with Circular Hole (Short)
+
+OBJECTIVE
+- Build a fully reproducible FEniCSx project for 2D isotropic elasticity of a plate with a centered circular hole under uniaxial tension.
+- Support plane stress/plane strain and full/quarter models; run mesh convergence; validate vs Kirsch; output publication-quality figures/CSVs.
+
+GEOMETRY & LOADS
+- R=0.05 m; W=6R=0.30 m; H=4R=0.20 m. Center at (0,0).
+- Variants: full plate ([-W/2,W/2]×[-H/2,H/2]) or quarter (x≥0,y≥0; default=quarter).
+- Right edge traction T = σ∞ = 100 MPa (uniform, +x). Hole: traction-free. θ from +x.
+
+MATERIAL
+- E=210 GPa, ν=0.30.
+- Plane strain: λ=Eν/((1+ν)(1−2ν)), μ=E/(2(1+ν)).
+- Plane stress:  λ=Eν/(1−ν²),            μ=E/(2(1+ν)).
+
+BCs
+- Full: left u_x=0; pin (-W/2,0) with u_y=0; right traction T; hole free.
+- Quarter (default): x=0 → u_x=0; y=0 → u_y=0; right traction T; top & hole free.
+
+MESH (Gmsh 2D)
+- Physical tags: 1=Left, 2=Right, 3=Bottom, 4=Top, 5=Hole, 6=Domain.
+- Hole resolution ≥128 segments. Size field: h_min=R/20, h_max=R/5.
+- Convergence h_min ∈ {R/30, R/20, R/15, R/10}.
+
+NUMERICS
+- Elements: vector CG2 (default), CG1 optional. Quadrature deg=4.
+- PETSc: CG (or GMRES), PC=GAMG (fallback ILU), rtol=1e-8, max_it=1000.
+- Post: ε, σ, σ_vm; project stresses to DG0/CG1 as needed.
+
+VALIDATION (Kirsch, large-domain case)
+- Kirsch is the infinite-plate solution; validate the solver on an auxiliary large-domain case W=H=40R (same R, material, load; quarter model).
+- On r=R: σ_θθ(R,θ)=σ∞(1−2cos2θ). Expect σ_θθ(R,90°)=3σ∞ and σ_θθ(R,0°)=−σ∞.
+- Sample θ ∈ {0°,45°,90°}; compute FEM vs Kirsch, relative error, and Kt=σ_θθ^max/σ∞.
+
+CONVERGENCE & ACCEPTANCE
+- Spec geometry (W=6R, H=4R): track σ_θθ(R,θ) and Kt vs h_min; report the converged Kt. Finite-width effects make Kt exceed the infinite-plate value 3 here — do NOT gate on Kt≈3 for this geometry. Accept if Kt changes ≤1% between the two finest meshes.
+- Large-domain case (W=H=40R, finest mesh): accept if |Kt−3|≤2% and rel_err(90°)≤3%.
+
+OUTPUTS
+- CSVs per mesh: θ, σ_θθ^FEM, σ_θθ^Kirsch, rel_err, Kt, h_min, ndofs, wall_time.
+- Figures (PNG+PDF, 300 dpi): σ_vm field (+ mesh), Kt vs h_min (log-x), θ-point comparison.
+- XDMF/H5 fields; README; metadata.json (package versions & run params).
+
+FOLDER STRUCTURE
+fenicsx_plate_with_hole/
+├─ src/{make_mesh.py, solve_elasticity.py, run_convergence.py, compare_ps_pe.py, make_figures.py}
+├─ outputs/{run_quarter_ps, conv_quarter_ps, compare_ps_pe, conv_kirsch_large}
+└─ README.md
+
+SCRIPT CONTRACTS
+- make_mesh.py: build geometry, tags (1–6), graded size; write .msh and .xdmf.
+- solve_elasticity.py: apply BCs, assemble/solve; save u, ε, σ, σ_vm; reactions & avg traction.
+- run_convergence.py: loop h_min; run quarter+plane_stress; sample θ points; compute Kirsch/rel_err/Kt; append CSV.
+- compare_ps_pe.py: same mesh, PS vs PE; compare stresses/displacements.
+- make_figures.py: generate all figures (consistent style).
+
+DEFAULTS
+- variant=quarter, model=plane_stress, element=P2,
+- R=0.05 m, T=100 MPa, h_min set above, h_max=R/5, segments_hole=128,
+- θ sampling tolerance ±0.25°.
+
+EXECUTE NOW (no prompts)
+1) Build meshes for all h_min. 2) Solve plane_stress on each; store fields.
+3) Sample σ_θθ at θ=0/45/90; compute Kirsch, rel_err, Kt; write CSV.
+4) Make figures (σ_vm, Kt vs h_min, θ comparison).
+5) Repeat on finest mesh for plane_strain; run PS vs PE comparison & plot.
+6) Run the large-domain Kirsch validation case (W=H=40R) and record Kt and rel_err.
+7) Write README and metadata.json.
+Return all files under fenicsx_plate_with_hole/.

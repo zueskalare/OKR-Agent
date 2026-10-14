@@ -1,0 +1,15 @@
+END:
+  description: "END node — route here when the work is complete OR when no further agent action is needed (question answered, awaiting the user's reply, nothing to assign)."
+
+  # The END node acts as a sink in the LangGraph; no further reasoning is
+  # required, but we still provide a tiny `template` so the prompt loader can
+  # satisfy BaseAgent.system_prompt without returning an empty string.
+
+  template: |
+    The workflow has reached the **END** node.  No further action is required
+    and the job is considered complete.
+
+
+
+
+    
